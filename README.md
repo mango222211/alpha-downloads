@@ -1,9 +1,11 @@
 # Alpha AI downloads
 
-[Download Alpha AI v4.0](https://mango222211.github.io/alpha-downloads/?v=4.0.0)
+[Download Alpha AI v4.1](https://mango222211.github.io/alpha-downloads/?v=4.1.0) · [Open Alpha on the web](https://alphaaiweb.com/)
 
-macOS Apple Silicon / Intel and Windows installers. v4.0 uses Cython-generated C++ application modules and a native C++ launcher on the operator server. CPython, PyTorch and Transformers remain dependencies; this is not a Python-free rewrite and does not claim reduced training memory or faster inference. End users do not install development tools.
+macOS Apple Silicon / Intel and Windows installers. v4.1 migrates the official server address, adds relevant automatic search with an opt-out, and lets macOS enforce screen capture authorization rather than stopping only on stale preflight status.
 
-Existing account, history, screen analysis and operator training APIs are preserved. Server source, secrets, user data and models are not included here.
+Mac PKG and Windows Setup replace the existing installation and preserve app data. Copies in other folders are not automatically removed. Development builds are not production signed or notarized. Some Macs still require screen permission re-registration after replacing a development build; capture success on the affected environment remains unverified. Windows hardware capture remains to be checked.
 
-Development builds are not production signed/notarized. 81 native-runtime server tests and 161 desktop tests passed. Tiny-model training and adapter round-trip passed; full 8B GPU training and real Windows installation require separate validation.
+85 server/native and 165 desktop/JavaScript checks passed. App installation and connection to the new server were verified on macOS. Prepared operator datasets are not newly trained model weights; full 8B training remains constrained by memory.
+
+This public repository contains only the download page, installation guide and binary release files. Server development source, secrets, user data and model weights are not included. GitHub's automatic source archives contain only this public download page and guide.
