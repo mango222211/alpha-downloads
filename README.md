@@ -1,13 +1,9 @@
-# Alpha AI downloads
+# Alpha AI 다운로드
 
-현재 배포: **v4.2.0** — 답변 생성 중 스크롤 위치 유지, 검색 애니메이션·출처 표시. Mac·Windows 설치 파일 및 앱 업데이트 피드를 함께 갱신했습니다. [업데이트 기록](CHANGELOG.md)
+[Alpha AI v4.3 다운로드](https://mango222211.github.io/alpha-downloads/?v=4.3.0) · [웹에서 열기](https://alphaaiweb.com/) · [업데이트 기록](CHANGELOG.md)
 
-[Download Alpha AI v4.2](https://mango222211.github.io/alpha-downloads/?v=4.2.0) · [Open Alpha on the web](https://alphaaiweb.com/)
+macOS Apple Silicon·Intel 및 Windows x64 설치 프로그램을 제공합니다. v4.3은 설정 및 화면 오류 창에 macOS 화면 기록 권한 복구 안내와 명령어 복사 버튼을 추가합니다. 기존 스크롤 개선과 검색 표시 기능도 포함됩니다.
 
-macOS Apple Silicon / Intel and Windows installers. v4.1 migrates the official server address, adds relevant automatic search with an opt-out, and lets macOS enforce screen capture authorization rather than stopping only on stale preflight status.
+개발용 미서명 배포이며 Apple 공증·Windows 코드 서명은 없습니다. 설치 프로그램은 기존 앱을 교체하고 사용자 데이터를 유지합니다. 다른 폴더에 남은 구버전 복사본은 자동 삭제하지 않습니다.
 
-Mac PKG and Windows Setup replace the existing installation and preserve app data. Copies in other folders are not automatically removed. Development builds are not production signed or notarized. Some Macs still require screen permission re-registration after replacing a development build; capture success on the affected environment remains unverified. Windows hardware capture remains to be checked.
-
-85 server/native and 165 desktop/JavaScript checks passed. App installation and connection to the new server were verified on macOS. Prepared operator datasets are not newly trained model weights; full 8B training remains constrained by memory.
-
-This public repository contains only the download page, installation guide and binary release files. Server development source, secrets, user data and model weights are not included. GitHub's automatic source archives contain only this public download page and guide.
+이 공개 저장소에는 다운로드 페이지, 안내 및 바이너리 릴리스만 포함합니다. 서버 소스, 키, 사용자 데이터 및 모델 가중치는 포함하지 않습니다. GitHub의 소스 아카이브에는 이 공개 안내 파일만 들어 있습니다.
