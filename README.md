@@ -1,8 +1,8 @@
 # Alpha AI 다운로드
 
-[Alpha AI v4.3 다운로드](https://mango222211.github.io/alpha-downloads/?v=4.3.0) · [웹에서 열기](https://alphaaiweb.com/) · [업데이트 기록](CHANGELOG.md)
+[Alpha AI v4.4 다운로드](https://mango222211.github.io/alpha-downloads/?v=4.4.0) · [웹에서 열기](https://alphaaiweb.com/) · [업데이트 기록](CHANGELOG.md)
 
-macOS Apple Silicon·Intel 및 Windows x64 설치 프로그램을 제공합니다. v4.3은 설정 및 화면 오류 창에 macOS 화면 기록 권한 복구 안내와 명령어 복사 버튼을 추가합니다. 기존 스크롤 개선과 검색 표시 기능도 포함됩니다.
+macOS Apple Silicon·Intel 및 Windows x64 설치 프로그램을 제공합니다. v4.4은 현재 화면 자료와 실제 검색 실행 상태를 모델에 전달하여 기능 설명을 개선합니다. 운영 서버를 재시작해야 적용됩니다. 기존 스크롤 개선과 검색 표시 기능도 포함됩니다.
 
 개발용 미서명 배포이며 Apple 공증·Windows 코드 서명은 없습니다. 설치 프로그램은 기존 앱을 교체하고 사용자 데이터를 유지합니다. 다른 폴더에 남은 구버전 복사본은 자동 삭제하지 않습니다.
 
