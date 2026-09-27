@@ -1,6 +1,8 @@
 # Alpha AI downloads
 
-[Download Alpha AI v4.1](https://mango222211.github.io/alpha-downloads/?v=4.1.0) · [Open Alpha on the web](https://alphaaiweb.com/)
+현재 배포: **v4.2.0** — 답변 생성 중 스크롤 위치 유지, 검색 애니메이션·출처 표시. Mac·Windows 설치 파일 및 앱 업데이트 피드를 함께 갱신했습니다. [업데이트 기록](CHANGELOG.md)
+
+[Download Alpha AI v4.2](https://mango222211.github.io/alpha-downloads/?v=4.2.0) · [Open Alpha on the web](https://alphaaiweb.com/)
 
 macOS Apple Silicon / Intel and Windows installers. v4.1 migrates the official server address, adds relevant automatic search with an opt-out, and lets macOS enforce screen capture authorization rather than stopping only on stale preflight status.
 
