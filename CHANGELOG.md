@@ -1,5 +1,18 @@
 # 업데이트 기록
 
+## v4.15.6 — 2026-10-11
+
+Windows 조작 오류 수정 앱 업데이트입니다(서버 변경 없음).
+
+### Windows 조작 "동작을 실행하지 못했습니다" 수정 (4.15.5 사용자 보고)
+- 원인: Windows PowerShell 5.1 은 **BOM 없는 .ps1 을 시스템 코드페이지(한국어 Windows: CP949)** 로 읽습니다. `input.ps1` 의 한글(`'메모' = 'notepad'` 등)이 깨지면서 따옴표 구조가 무너져 `MissingEqualsInHashLiteral` 구문 오류로 도우미가 시작조차 못 했습니다(사용자가 직접 실행해 확인한 오류문).
+- 수정: `desktop/native/*.ps1` 5개 모두 **UTF-8 BOM** 으로 저장(한글이 든 `calendar.ps1` 도 같은 문제였음). 회귀 테스트: 모든 .ps1 이 BOM 으로 시작하는지 검사.
+
+### 컴퓨터 조작 — 실패 원인 표시(Windows 4.15.5 "동작을 실행하지 못했습니다" 보고)
+- 조작 도우미(macOS alpha-input / Windows input.ps1)가 실패하면 **원인 한 줄을 함께** 보여 줍니다: `동작을 실행하지 못했습니다. (도우미: …)` — PowerShell·도우미의 오류 첫 줄, "15초 안에 응답이 없음", "실행 파일 없음: …", "응답을 읽을 수 없음: …" 중 하나. 같은 내용이 `connection.log`(phase `control-helper`)에 남습니다.
+- Windows 에서 도우미(PowerShell)를 부를 때 콘솔 창이 깜빡이지 않도록 숨김(`windowsHide`)으로 실행합니다.
+- 테스트 `desktop/tests/win-input.test.cjs` 에 실패 원인 표시 검증 추가(데스크톱 298 통과·1 건너뜀).
+
 ## v4.15.5 — 2026-10-11
 
 4.15.4 게시 직후의 소규모 업데이트입니다. 서버 쪽 변경(이용 제한 API, 지원 플랫폼 지침)은 alphaaiweb.com 서버 재빌드·재시작으로 적용되고, 앱 쪽 변경(Windows 조작 상태 `supported`)은 이 버전부터 동작합니다. 웹 정적 파일 변경(이용 제한 화면, 사이드바 간격)은 새로고침으로 반영됩니다.
