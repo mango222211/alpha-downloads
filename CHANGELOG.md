@@ -1,5 +1,27 @@
 # 업데이트 기록
 
+## v4.15.15 — 2026-10-13
+
+4.15.14(2026-10-12 15:51Z 게시) 뒤에 들어간 변경입니다. 서버·웹·앱(Windows/Mac)이 모두 바뀝니다.
+
+### 알람·타이머는 만든 기기에서만 울림 (사용자 결정 2026-10-13, 서버·웹·앱)
+- 같은 계정으로 Windows 와 Mac 에 함께 로그인해 두면 한쪽에서 만든 5초 타이머가 양쪽에서 울렸습니다. 이제 **Alpha 앱에서 만든 알람·타이머는 만든 기기에서만 울리고**, 다른 기기의 시간 메뉴에는 목록에만 보입니다("다른 기기에서 울림 (Mac · 이름)" 표시). 웹 브라우저에서 만든 것(기기 표식 없음)은 전처럼 모든 기기에서 울립니다. 스톱워치는 원래 화면에서만 돌아 영향이 없습니다.
+- 앱: 설치본마다 기기 표식(`deviceId`)을 한 번 만들어 저장하고 서버 요청에 `X-Alpha-Device`·`X-Alpha-Device-Name` 헤더로 보냅니다(`desktop/network-policy.cjs`). OS 스케줄러에는 이 기기 것만 걸고(`time-scheduler.forDevice`), 다른 기기 것은 다음 동기화(변경 직후·5분)에서 내립니다. 서버: `alarms`·`timers` 에 `device`·`device_name` 열(마이그레이션), 만들 때 헤더에서 기록, `/api/session` 이 기기 표식을 되돌려 줌.
+- 테스트 `test_timekeeping.DeviceScopeTests`, `time-sync.test.cjs`(기기 필터), `network-policy.test.cjs`. Python 257개(test_native 제외)·데스크톱 308개 통과.
+
+### 알람 소리 통일 — Alpha 전용 알람음을 Windows·Mac 에 내장 (사용자 결정 2026-10-13, 앱)
+- Windows 는 Windows 기본 음원(Alarm01.wav), Mac 은 Apple Glass 를 써서 소리가 달랐습니다. Microsoft 음원을 Mac 에 넣을 수는 없어 **Alpha 전용 알람음**(`desktop/native/alarm.wav`, 2초 두 음 벨 톤, 직접 합성)을 만들어 양쪽 앱에 내장하고 둘 다 그 파일을 반복 재생합니다. 파일이 없으면 전처럼 Windows 기본 음원 / Apple Glass 로 대체합니다.
+- Windows `time-notify.ps1` `-Sound` 인자(스케줄러가 도우미 폴더의 alarm.wav 경로를 넘김), Mac launchd 스크립트는 앱 리소스의 alarm.wav 를 afplay. `package.cjs` 가 두 플랫폼 리소스에 alarm.wav 를 복사. PowerShell 구문 검사와 끄기 파일 폴링 동작 검사 통과, 데스크톱 308개 통과.
+
+### 다이나믹·메뉴 막대 스톱워치 박자 (사용자 보고 2026-10-13, 앱)
+- 다이나믹 칩과 메뉴 막대의 시계 글자는 1초마다 확인해 바꾸고 있어서, 시간 메뉴 스톱워치(50ms 갱신)와 초가 넘어가는 순간이 최대 1초까지 어긋났습니다. 100ms 마다 확인하고 글자가 바뀔 때만 보내도록 바꿨습니다(타이머·알람 칩도 같은 효과).
+
+### 성능 측정 — 요청·단계별 소요 시간 기록과 보고서 (사용자 결정 2026-10-13: 먼저 측정 → 병목만 최적화; 서버)
+- 사실 확인: 서버 파이썬은 이미 Cython 으로 C/C++ 컴파일된 `alpha-native` 로 돌고, 시간 대부분은 모델 추론(PyTorch C++ 커널)·비전(Ollama)에서 씁니다. 전면 C++ 재작성 대신 측정으로 병목을 찾기로 했습니다.
+- 모든 `/api` 요청의 경로(개인 id 는 `<id>` 로 가림)·상태·총 ms 를 `<데이터 폴더>/logs/perf.log` 에 남기고, `/api/chat` 은 단계별(intent 의도 분류 · route 조작 판정 · summary 요약 적용 · search 검색 · prepare 입력 준비 · first_token 첫 글자 · model 답변 생성)로 남깁니다(`backend/perf.py`). 질문·이메일은 쓰지 않습니다. 1 MB 넘으면 반으로 자름. 폴링 요청(health·search-progress·time/due)은 제외.
+- 보고서: `python3 server.py --perf-report`(네이티브: `.data/native/current/alpha-native server --perf-report`) — 경로별·단계별 건수·중앙값·p95·최대·합계 표. 하루 정도 실제 사용 뒤 보고서를 보내 주시면 느린 단계만 Cython 정적 타입·C++ 확장·알고리즘 개선으로 손봅니다.
+- 테스트 `tests/test_perf.py`(2). Python 259개(test_native 제외)·데스크톱 308개 통과.
+
 ## v4.15.14 — 2026-10-13
 
 4.15.13(2026-10-12 15:13Z 게시) 뒤에 들어간 변경입니다. 앱(Windows/Mac)이 바뀝니다.
